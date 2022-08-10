@@ -1,8 +1,8 @@
-use crate::generate_try_from;
+use crate::primitive_enum;
 
 pub mod error;
 
-generate_try_from! {
+primitive_enum! {
     #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
     #[repr(usize)]
     pub enum Syscall: usize {

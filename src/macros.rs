@@ -8,7 +8,7 @@
 ///
 /// will generate a TryFrom&lt;usize&gt; implementation for MyEnum.
 #[macro_export]
-macro_rules! generate_try_from {
+macro_rules! primitive_enum {
     ($(#[$meta:meta])* $vis:vis enum $name:ident : $typ:ty {
         $($(#[$vmeta:meta])* $vname:ident $(= $val:expr)?,)*
     }) => {
@@ -24,6 +24,15 @@ macro_rules! generate_try_from {
                 match v {
                     $(x if x == $name::$vname as $typ => Ok($name::$vname),)*
                     _ => Err(()),
+                }
+            }
+        }
+
+        impl core::convert::From<$name> for $typ {
+            fn from(v: $name) -> Self {
+                match v {
+                    $(x if x == $name::$vname => $name::$vname as $typ,)*
+                    _ => unreachable!(),
                 }
             }
         }
