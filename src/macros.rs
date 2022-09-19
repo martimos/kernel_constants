@@ -1,6 +1,6 @@
 /// Generates a TryFrom implementation for the enclosed enum.
 ///
-///     generate_try_from! {
+///     primitive_enum! {
 ///         enum MyEnum: usize {
 ///             ...
 ///         }
